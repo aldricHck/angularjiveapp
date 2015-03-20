@@ -1,0 +1,27 @@
+<section data-ng-controller="PollsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Polls</h1>
+    </div>
+    <div class="row">
+
+        <div data-ng-repeat="poll in polls" class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <a data-ng-href="#!/polls/{{poll._id}}" >
+                    <img ng-src="{{poll.urlThumbnail}}" style="max-width: 200px; max-height: 60px;" ng-if="poll.urlThumbnail">
+                    <div class="caption">
+                        <h4 class="list-group-item-heading" data-ng-bind="poll.name"></h4>
+                        <small class="list-group-item-text">
+                            Posted on
+                            <span data-ng-bind="poll.created | date:'medium'"></span>
+                            by
+                            <span data-ng-bind="poll.user.displayName"></span>
+                        </small>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!polls.$resolved || polls.length">
+    	No Polls yet, why don't you <a href="/#!/polls/create">create one</a>?
+    </div>
+</section>
