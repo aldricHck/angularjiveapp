@@ -5,11 +5,11 @@ module.exports = function(app) {
 	var polls = require('../../app/controllers/polls.server.controller');
 
 	// Polls Routes
-	app.route('/polls')
+	app.route('/api/polls')
 		.get(polls.list)
 		.post(users.requiresLogin, polls.create);
 
-	app.route('/polls/:pollId')
+	app.route('/api/polls/:pollId')
 		.get(polls.read)
 		.put(users.requiresLogin, polls.hasAuthorization, polls.update)
 		.delete(users.requiresLogin, polls.hasAuthorization, polls.delete);

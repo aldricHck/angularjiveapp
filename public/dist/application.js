@@ -21,6 +21,13 @@ var ApplicationConfiguration = (function() {
 		registerModule: registerModule
 	};
 })();
+gadgets.util.registerOnLoadHandler(function() {
+  // add code that should run on page load here
+    osapi.jive.corev3.people.getViewer().execute( function(viewerData) {
+         console.log(viewerData);
+    });
+});
+
 'use strict';
 
 //Start by defining the main module and adding the module dependencies
@@ -36,11 +43,13 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 //Then define the init function for starting up the application
 angular.element(document).ready(function() {
 	//Fixing facebook bug with redirect
+    console.log(document.location);
 	if (window.location.hash === '#_=_') window.location.hash = '#!';
 
 	//Then init the app
 	angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
+
 'use strict';
 
 // Use Applicaion configuration module to register a new module
@@ -69,6 +78,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		});
 	}
 ]);
+
 'use strict';
 
 angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
